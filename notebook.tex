@@ -1,0 +1,714 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{pyber\_ib}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Pyber Ride Sharing}\label{pyber-ride-sharing}
+
+\section{Analysis}\label{analysis}
+
+\subsubsection{Observed Trend 1}\label{observed-trend-1}
+
+Two thirds (2/3), 68\%, of Pyber rides are taken in Urban cities, almost
+one third ( 1/3), around 27\%, of Piber rides are taken in Suburban
+citis, and only very small percentage, 5\%, of Pyber rides are taken in
+Rural cities. \#\#\#Observed Trend 2 Similarly, the number of Pyber
+drivers are distributed, 68\% in Urban cities, around 27\% in Suburban
+cities, and only 5\% in Rural cities. \#\#\#Observed Trend 3 For the
+fares, the numbers are slightly different. 63\% in Urban cities, 31\% in
+Suburban cities, and around 7\% in Rural cities. It is happening because
+the fares are hihger in Suburban and Rural areas than in Urban areas.
+The average prices per ride in Rural and Suburban areas are around \$33,
+and in Urban areas the average price per ride is around \$25.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} '2.1.2'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Take in all of our wrestling data and read it into pandas}
+         \PY{n}{city\PYZus{}data\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw\PYZus{}data/city\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{ride\PYZus{}data\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{raw\PYZus{}data/ride\PYZus{}data.csv}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{n}{city\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{city\PYZus{}data\PYZus{}file}\PY{p}{)}
+         \PY{n}{ride\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{ride\PYZus{}data\PYZus{}file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Merge two datasets on \PYZdq{}City\PYZdq{} so that no data is lost}
+         \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{city\PYZus{}data\PYZus{}df}\PY{p}{,} \PY{n}{ride\PYZus{}data\PYZus{}df}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}             city  driver\_count   type                 date   fare  \textbackslash{}
+         0    Richardfort            38  Urban  2018-02-24 08:40:38  13.93   
+         1    Richardfort            38  Urban  2018-02-13 12:46:07  14.00   
+         2    Richardfort            38  Urban  2018-02-16 13:52:19  17.92   
+         3    Richardfort            38  Urban  2018-02-01 20:18:28  10.26   
+         4    Richardfort            38  Urban  2018-04-17 02:26:37  23.00   
+         5    Richardfort            38  Urban  2018-04-21 03:44:04   9.54   
+         6    Richardfort            38  Urban  2018-02-03 00:14:26  29.04   
+         7    Richardfort            38  Urban  2018-02-08 15:50:12  16.55   
+         8    Richardfort            38  Urban  2018-04-03 15:07:34  40.77   
+         9    Richardfort            38  Urban  2018-02-19 14:09:20  27.11   
+         10   Richardfort            38  Urban  2018-04-22 03:06:56  39.74   
+         11   Richardfort            38  Urban  2018-01-31 14:51:01  43.92   
+         12   Richardfort            38  Urban  2018-03-04 22:13:57  14.83   
+         13   Richardfort            38  Urban  2018-03-28 19:33:00   7.75   
+         14   Richardfort            38  Urban  2018-02-14 03:27:28  44.11   
+         15   Richardfort            38  Urban  2018-04-27 11:59:25  30.31   
+         16   Richardfort            38  Urban  2018-03-03 11:57:24  11.42   
+         17   Richardfort            38  Urban  2018-01-13 10:08:54  25.81   
+         18   Richardfort            38  Urban  2018-03-06 12:53:05   8.28   
+         19   Richardfort            38  Urban  2018-02-05 16:12:04  42.22   
+         20   Richardfort            38  Urban  2018-04-04 15:04:56  16.35   
+         21   Richardfort            38  Urban  2018-03-05 16:00:59   4.85   
+         22   Richardfort            38  Urban  2018-04-14 11:56:28  43.01   
+         23   Richardfort            38  Urban  2018-01-21 23:20:53  10.91   
+         24   Richardfort            38  Urban  2018-03-16 23:00:51  21.39   
+         25   Richardfort            38  Urban  2018-03-22 04:41:04  16.35   
+         26   Richardfort            38  Urban  2018-01-03 01:06:17   5.32   
+         27   Richardfort            38  Urban  2018-03-29 15:16:01  37.76   
+         28  Williamsstad            59  Urban  2018-01-23 17:51:24  19.62   
+         29  Williamsstad            59  Urban  2018-03-29 21:43:04  35.58   
+         
+                   ride\_id  
+         0   5628545007794  
+         1    910050116494  
+         2    820639054416  
+         3   9554935945413  
+         4    720020655850  
+         5   3698147103219  
+         6   4982665519010  
+         7   2270463070874  
+         8   9496210735824  
+         9   8690324801449  
+         10  4081388893008  
+         11  4066949857460  
+         12  9474112834050  
+         13  5539056178883  
+         14  2503858662225  
+         15  6106446829435  
+         16  2916078036620  
+         17  9110913538598  
+         18  5127600643309  
+         19  4051093040264  
+         20  6077906760851  
+         21  3291539624738  
+         22  7636011510547  
+         23  3567611375530  
+         24   237473464569  
+         25  5934239154720  
+         26  3268844473610  
+         27  4802688422688  
+         28   125986195523  
+         29  4747780858464  
+\end{Verbatim}
+            
+    \section{Pyber Ride Sharing Data
+(2016)}\label{pyber-ride-sharing-data-2016}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Create a Scatter Plot based on Pyber Ride Data (2016)}
+             
+         \PY{c+c1}{\PYZsh{} Separate Combined City Ride dataset into 3 parts/datasets by \PYZdq{}type\PYZdq{}}
+         \PY{n}{rural\PYZus{}city\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rural}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(rural\PYZus{}city\PYZus{}data\PYZus{}df[\PYZsq{}ride\PYZus{}id\PYZsq{}].count())}
+         
+         \PY{n}{suburban\PYZus{}city\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suburban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(suburban\PYZus{}city\PYZus{}data\PYZus{}df[\PYZsq{}ride\PYZus{}id\PYZsq{}].count())}
+         
+         \PY{n}{urban\PYZus{}city\PYZus{}data\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Urban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(urban\PYZus{}city\PYZus{}data\PYZus{}df[\PYZsq{}ride\PYZus{}id\PYZsq{}].count())}
+         
+         \PY{c+c1}{\PYZsh{} Get the values for each part of the scatter plot by city \PYZdq{}type\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Within \PYZdq{}Rural\PYZdq{} dataset type, get valuess for the scatter plot using GroupBy by \PYZdq{}city\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields by \PYZdq{}city\PYZdq{} values}
+         \PY{n}{rural\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df} \PY{o}{=} \PY{n}{rural\PYZus{}city\PYZus{}data\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for X axis}
+         \PY{n}{rural\PYZus{}num\PYZus{}rides} \PY{o}{=} \PY{n}{rural\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ride\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(rural\PYZus{}num\PYZus{}rides)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for Y axis}
+         \PY{n}{rural\PYZus{}avg\PYZus{}fares} \PY{o}{=} \PY{n}{rural\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(rural\PYZus{}avg\PYZus{}fares)}
+         
+         \PY{c+c1}{\PYZsh{} To determine Circle size}
+         \PY{n}{rural\PYZus{}driver\PYZus{}count} \PY{o}{=} \PY{n}{rural\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{driver\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(rural\PYZus{}driver\PYZus{}count)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Within \PYZdq{}Suburban\PYZdq{} dataset type, get valuess for the scatter plot using GroupBy by \PYZdq{}city\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields by \PYZdq{}city\PYZdq{} values}
+         \PY{n}{suburban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df} \PY{o}{=} \PY{n}{suburban\PYZus{}city\PYZus{}data\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for X axis}
+         \PY{n}{suburban\PYZus{}num\PYZus{}rides} \PY{o}{=} \PY{n}{suburban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ride\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(suburban\PYZus{}num\PYZus{}rides)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for Y axis}
+         \PY{n}{suburban\PYZus{}avg\PYZus{}fares} \PY{o}{=} \PY{n}{suburban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(suburban\PYZus{}avg\PYZus{}fares)}
+         
+         \PY{c+c1}{\PYZsh{} To determine Circle size}
+         \PY{n}{suburban\PYZus{}driver\PYZus{}count} \PY{o}{=} \PY{n}{suburban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{driver\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(suburban\PYZus{}driver\PYZus{}count)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Within \PYZdq{}Urban\PYZdq{} dataset type, get valuess for the scatter plot using GroupBy by \PYZdq{}city\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields by \PYZdq{}city\PYZdq{} values}
+         \PY{n}{urban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df} \PY{o}{=} \PY{n}{urban\PYZus{}city\PYZus{}data\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for X axis}
+         \PY{n}{urban\PYZus{}num\PYZus{}rides} \PY{o}{=} \PY{n}{urban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ride\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(urban\PYZus{}num\PYZus{}rides)}
+         
+         \PY{c+c1}{\PYZsh{} Get values for Y axis}
+         \PY{n}{urban\PYZus{}avg\PYZus{}fares} \PY{o}{=} \PY{n}{urban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(urban\PYZus{}avg\PYZus{}fares)}
+         
+         \PY{c+c1}{\PYZsh{} To determine Circle size}
+         \PY{n}{urban\PYZus{}driver\PYZus{}count} \PY{o}{=} \PY{n}{urban\PYZus{}grouped\PYZus{}by\PYZus{}city\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{driver\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print(urban\PYZus{}driver\PYZus{}count)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Creating Pyber Ride Sharing Data (2016) Scatter Plot}
+         
+         \PY{c+c1}{\PYZsh{} Clear space for the scatter plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Organize the layout for the scatter plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pyber Ride Sharing Data (2016)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Fontsize}\PY{o}{=} \PY{l+m+mi}{14} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Labels for the scatter plot circles by city \PYZdq{}type\PYZdq{}}
+         \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rural}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suburban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Urban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Colors for the scatter plot circles depending on city \PYZdq{}type\PYZdq{}}
+         \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightskyblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightcoral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Define X and Y of the scatter plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total Number of Rides (Per City)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Fare(\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Define X and Y limits}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{45} \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{40} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Writing data to the same Scatter Plot 3 times, for each city \PYZdq{}type\PYZdq{}( \PYZdq{}Rural\PYZdq{}, \PYZdq{}Suburban\PYZdq{} \PYZdq{}Urban\PYZdq{})}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(} \PY{n}{rural\PYZus{}num\PYZus{}rides}\PY{p}{,} \PY{n}{rural\PYZus{}avg\PYZus{}fares}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{20}\PY{o}{*}\PY{n}{rural\PYZus{}driver\PYZus{}count}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                     \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{alpha} \PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rural}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(} \PY{n}{suburban\PYZus{}num\PYZus{}rides}\PY{p}{,} \PY{n}{suburban\PYZus{}avg\PYZus{}fares}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{o}{*}\PY{n}{suburban\PYZus{}driver\PYZus{}count}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightskyblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                     \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Suburban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(} \PY{n}{urban\PYZus{}num\PYZus{}rides}\PY{p}{,} \PY{n}{urban\PYZus{}avg\PYZus{}fares}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{o}{*}\PY{n}{urban\PYZus{}driver\PYZus{}count}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightcoral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                    \PY{n}{edgecolor}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Urban}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+         \PY{c+c1}{\PYZsh{} Create the legend of the Scatter plot}
+         \PY{n}{legend} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{small}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{best}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Write comments on the right of the grid}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mf}{15.5}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Note:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Circle size correlates with}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{driver count per city.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Save the figure with the Scatter Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PyberRideDataScatterPlot.pdf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Show the Scatter Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} Another way to display the otput chart, if Matplotlab is buggy}
+         \PY{c+c1}{\PYZsh{} file1 = \PYZdq{}PyberRideDataScatterPlot.pdf\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} display(Image.open(file1))}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \section{Total Fares by City Type}\label{total-fares-by-city-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Get the values for each section of the pie chart}
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields according to city\PYZdq{}type\PYZdq{} values}
+         \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}fares\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sum\PYZus{}fares} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}fares\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print (sum\PYZus{}fares)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Creating \PYZdq{}\PYZpc{} of Total Fares by City Type\PYZdq{} PIE CHART}
+         \PY{c+c1}{\PYZsh{} Clear the pie chart space}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Labels for the sections of our pie chart}
+         \PY{c+c1}{\PYZsh{}labels = [\PYZdq{}Rural\PYZdq{}, \PYZdq{}Suburban\PYZdq{}, \PYZdq{}Urban\PYZdq{}]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}fares\PYZus{}df}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print( labels)}
+         \PY{c+c1}{\PYZsh{} The colors of each section of the pie chart}
+         \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightskyblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightcoral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Tells matplotlib to seperate the \PYZdq{}Urban\PYZdq{} section from the others}
+         \PY{n}{explode} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Creates the pie chart based upon the values above}
+         \PY{c+c1}{\PYZsh{} Automatically finds the percentages of each part of the pie chart}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sum\PYZus{}fares}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{n}{explode}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{n}{colors}\PY{p}{,}
+                 \PY{n}{autopct}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{140}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Tells matplotlib that we want a pie chart with equal axes}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f Total Fares by City Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{equal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Save an image of our chart and print the final product to the screen}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FaresByCityType.pdf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Another way to display the otput chart, if Matplotlab is buggy}
+         \PY{c+c1}{\PYZsh{} file2 = \PYZdq{}FaresByCityType.pdf\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} display(Image.open(file2))}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \section{Total Rides by City Type}\label{total-rides-by-city-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Get the values for each section of the pie chart}
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields according to city\PYZdq{}type\PYZdq{} values}
+         \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}rides\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sum\PYZus{}rides} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}rides\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ride\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print (sum\PYZus{}rides)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}plt.get\PYZus{}fignums()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} Creating \PYZdq{}\PYZpc{} of Total Rides by City Type\PYZdq{} PIE CHART}
+         
+         \PY{c+c1}{\PYZsh{} Clear the pie chart space}
+         \PY{c+c1}{\PYZsh{}plt.gcf().clear()}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Labels for the sections of our pie chart}
+         \PY{c+c1}{\PYZsh{}labels = [\PYZdq{}Rural\PYZdq{}, \PYZdq{}Suburban\PYZdq{}, \PYZdq{}Urban\PYZdq{}]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}rides\PYZus{}df}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print( labels)}
+         \PY{c+c1}{\PYZsh{} The colors of each section of the pie chart}
+         \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightskyblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightcoral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Tells matplotlib to seperate the \PYZdq{}Urban\PYZdq{} section from the others}
+         \PY{n}{explode} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Creates the pie chart based upon the values above}
+         \PY{c+c1}{\PYZsh{} Automatically finds the percentages of each part of the pie chart}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{sum\PYZus{}rides}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{n}{explode}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{n}{colors}\PY{p}{,}
+                 \PY{n}{autopct}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{140}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Tells matplotlib that we want a pie chart with equal axes}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f Total Rides by City Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{equal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Save an image of our chart and print the final product to the screen}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RidesByCityType.pdf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}plt.tight\PYZus{}layout()}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \section{Total Drivers by City Type}\label{total-drivers-by-city-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} Get the values for each section of the pie chart}
+         \PY{c+c1}{\PYZsh{} Using GroupBy in order to separate combined city ride data into fields according to city\PYZdq{}type\PYZdq{} values}
+         \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}drivers\PYZus{}df} \PY{o}{=} \PY{n}{combined\PYZus{}city\PYZus{}ride\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{count\PYZus{}drivers} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}drivers\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{driver\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print (count\PYZus{}drivers)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} Creating \PYZdq{}\PYZpc{} of Total Drivers by City Type\PYZdq{} PIE CHART}
+         
+         \PY{c+c1}{\PYZsh{} Clear the pie chart space}
+         \PY{c+c1}{\PYZsh{}plt.gcf().clear()}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Labels for the sections of our pie chart}
+         \PY{c+c1}{\PYZsh{}labels = [\PYZdq{}Rural\PYZdq{}, \PYZdq{}Suburban\PYZdq{}, \PYZdq{}Urban\PYZdq{}]}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{type\PYZus{}grouped\PYZus{}city\PYZus{}rides\PYZus{}df}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}print( labels)}
+         \PY{c+c1}{\PYZsh{} The colors of each section of the pie chart}
+         \PY{n}{colors} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightskyblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightcoral}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Tells matplotlib to seperate the \PYZdq{}Urban\PYZdq{} section from the others}
+         \PY{n}{explode} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Creates the pie chart based upon the values above}
+         \PY{c+c1}{\PYZsh{} Automatically finds the percentages of each part of the pie chart}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{count\PYZus{}drivers}\PY{p}{,} \PY{n}{explode}\PY{o}{=}\PY{n}{explode}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{labels}\PY{p}{,} \PY{n}{colors}\PY{o}{=}\PY{n}{colors}\PY{p}{,}
+                \PY{n}{autopct}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}1.1f}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shadow}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{startangle}\PY{o}{=}\PY{l+m+mi}{140}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f Total Drivers by City Type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Fontsize} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Tells matplotlib that we want a pie chart with equal axes}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{equal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Save an image of our chart and print the final product to the screen}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DriversByCityType.pdf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}plt.get\PYZus{}fignums()}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
